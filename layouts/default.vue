@@ -1,15 +1,15 @@
 <template>
   <div>
-    <l-header />
     <nuxt />
+    <l-footer />
   </div>
 </template>
 
 <script>
-import lHeader from "~/components/Header";
+import lFooter from "~/components/Footer";
 export default {
   components: {
-    lHeader
+    lFooter
   }
 };
 </script>
