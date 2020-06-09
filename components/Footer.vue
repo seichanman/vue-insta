@@ -30,6 +30,8 @@ export default {};
   border-top: 1px solid $gray-4;
   &__body {
     padding: 10px 40px;
+    max-width: 960px;
+    margin: 0 auto;
   }
 
   &__buttons {
