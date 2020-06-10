@@ -2,15 +2,15 @@
   <footer class="footer">
     <div class="footer__body">
       <div class="footer__buttons">
-        <div class="footer__button">
+        <nuxt-link to="/" class="footer__button">
           <img src="~/static/images/home.svg" alt class="footer__icon" />
-        </div>
-        <div class="footer__button">
+        </nuxt-link>
+        <nuxt-link to="/users" class="footer__button">
           <img src="~/static/images/follow.svg" alt class="footer__icon" />
-        </div>
-        <div class="footer__button">
+        </nuxt-link>
+        <nuxt-link to="/profile" class="footer__button">
           <img src="~/static/images/profile.svg" alt class="footer__icon" />
-        </div>
+        </nuxt-link>
       </div>
     </div>
   </footer>
