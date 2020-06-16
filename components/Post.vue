@@ -26,10 +26,14 @@
 
 <script>
 export default {
-    props:['post','user','beLiked'],
+    props:['post'],
     data(){
         return{
-            createdAt:new Date()
+            user:{
+                displayName:'siho',
+                photoURL:'/images/post1.jpg'
+            },
+            beLiked:false
         }
     },
     computed:{
