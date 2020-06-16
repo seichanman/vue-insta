@@ -29,22 +29,26 @@ export default {};
   background-color: $white;
   border-top: 1px solid $gray-4;
   &__body {
-    padding: 10px 40px;
-    max-width: 960px;
+    max-width: $container;
     margin: 0 auto;
   }
-
   &__buttons {
+    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   &__button {
+    width: calc(100%/3);
+    display: flex;
+    justify-content: center;
   }
 
   &__icon {
     vertical-align: bottom;
+    max-width: 24px;
+    max-height: 24px;
   }
 }
 </style>

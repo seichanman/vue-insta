@@ -1,41 +1,67 @@
 <template>
     <div class="post">
         <post v-for="(post,index) in posts" :key="index" :post="post" />
-        <!--
-        <div class="post-modal">
+        <div v-if="modalVisible" class="post-modal">
             <div class="post-modal__action">
-                <div class="post-modal__action-s">
-                    <img src="/images/back.svg" alt="">
+                <div class="post-modal__action-arrow" @click="modalVisible = false">
+                    <img src="/images/back.svg" >
                 </div>
-                <div class="post-modal__action-btn"></div>
+                <div class="post-modal__action-btn" @click="post">
+                    Post
+                </div>
             </div>
             <div class="post-modal__content">
-                <el-upload action="" :show-file-list="false"
+                <div v-if="imageUrl" class="post-modal__content-img">
+                    <img :src="imageUrl" alt="">
+                </div>
+                <el-upload v-if="!imageUrl" action="" :show-file-list="false"
                 :http-request="uploadFile">
-                    <el-button size="small" type="primary"></el-button>
+                    <el-button class="post-modal__content-btn" size="small" type="primary">Click to upload</el-button>
                 </el-upload>
+                <el-input class="post-modal__content-text" type="textarea" :rows="8" placeholder="please input"  v-model="text"></el-input>
             </div>
         </div>
-        -->
     </div>
 </template>
 
 <script>
 import Post from '~/components/Post.vue'
-import { db } from '~/plugins/firebase'
+import { db,firebase } from '~/plugins/firebase'
 
 export default {
     data(){
         return{
-            posts:[]
+            posts:[],
+            imageUrl:null,
+            text:null,
+            modalVisible:false
         }
     },
     components: {
         Post
     },
     methods:{
-        uploadFile(data){
-            debugger
+        async post(){
+            await db.collection('posts').add({
+                text:this.text,
+                image:this.imageUrl,
+                createdAt:new Date().getTime()
+            })
+            this.modalVisible = false
+            this.text = null
+            this.imageUrl = null
+            window.alert('保存されたよ')
+        },
+        openModal(){
+            this.modalVisible = true
+        },
+        async uploadFile(data){
+            const storageRef = firebase.storage().ref()
+            const time = new Date().getTime()
+            const ref = storageRef.child(`posts/${time}_${data.file.name}`)
+            const snapshot = await ref.put(data.file)
+            const url = await snapshot.ref.getDownloadURL()
+            this.imageUrl = url
         }
     },
     mounted(){//非同期処理
@@ -64,6 +90,41 @@ export default {
             background: #fff;
             z-index: 999;
             padding: 6%;
+            &__action{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                max-width: 980px;
+                margin: 0 auto;
+                &-arrow{
+                    display: block;
+                    cursor: pointer;
+                }
+                &-btn{
+                    background: #333;
+                    border-radius: 15px;
+                    color: #fff;
+                    line-height: 30px;
+                    text-align: center;
+                    width: 70px;
+                    font-size: 1.4rem;
+                    cursor: pointer;
+                }
+            }
+            &__content{
+                width: 100%;
+                max-width: 980px;
+                margin: 0 auto;
+                &-btn{
+                display: block;
+                width: 100%;
+                margin-top: 40px;
+                font-size:1.6rem;
+                }
+                &-text{
+                    margin-top: 20px;
+                }
+            }
         }
     }
 </style>

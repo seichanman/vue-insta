@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 //firebaseのアプリケーションが設定されているときに
 if(!firebase.apps.length){

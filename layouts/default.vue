@@ -13,3 +13,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+    .el-button {
+        width: 100%;
+    }
+    .el-upload{
+        width: 100%;
+    }
+</style>

@@ -24,7 +24,7 @@ $lg: 1264px;
 $xl: 1904px;
 
 //コンテンツ幅
-$container:980px;
+$container:680px;
 
 @mixin sm {
   @media (max-width: ($sm)) {

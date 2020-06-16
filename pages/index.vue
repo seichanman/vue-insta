@@ -5,11 +5,11 @@
         <div class="header__logo">
           <img src="/images/logo.png" class="">
         </div>
-        <img class="header__post" src="/images/letter.svg">
+        <img class="header__post" src="/images/letter.svg" @click="openModal">
       </div>
     </header>
     <div class="container">
-      <posts />
+      <posts ref="posts" />
     </div>
   </div>
 </template>
@@ -20,7 +20,12 @@ import Posts from '~/components/Posts.vue'
 export default {
  components: {
    Posts
+ },methods:{
+   openModal(){
+     this.$refs.posts.openModal()
+   }
  }
+
 }
 </script>
 
@@ -53,6 +58,7 @@ export default {
       right: 20px;
       transform: translateY(-50%);
       max-width: 24px;
+      cursor: pointer;
     }
   }
   .container{

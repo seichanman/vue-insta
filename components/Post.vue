@@ -62,8 +62,9 @@ export default {
             font-size: 1.4rem;
         }
     }
-    &__img{
+    &__img,& img{
         width: 100%;
+        
     }
     &__count{
         display: flex;

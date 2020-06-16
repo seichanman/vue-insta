@@ -1,31 +1,29 @@
 <template>
   <div class="profile">
-    <div class="profile__body">
-      <div class="profile__head">
-        <div class="profile__user">
-          <div class="profile__icon">
-            <img src="~/static/images/post1.jpg" alt />
-          </div>
-          <span class="profile__name">user-name</span>
+    <div class="profile__head">
+      <div class="profile__user">
+        <div class="profile__icon">
+          <img src="~/static/images/post1.jpg" alt />
         </div>
-        <button class="profile__button">ログアウト</button>
+        <span class="profile__name">user-name</span>
       </div>
-      <div class="profile__info">
-        <ul class="profile__items">
-          <li class="profile__item">
-            <span class="profile__title">post</span>
-            <span class="profile__number">0</span>
-          </li>
-          <li class="profile__item">
-            <span class="profile__title">following</span>
-            <span class="profile__number">0</span>
-          </li>
-          <li class="profile__item">
-            <span class="profile__title">follower</span>
-            <span class="profile__number">0</span>
-          </li>
-        </ul>
-      </div>
+      <button class="profile__button">ログアウト</button>
+    </div>
+    <div class="profile__info">
+      <ul class="profile__items">
+        <li class="profile__item">
+          <span class="profile__title">post</span>
+          <span class="profile__number">0</span>
+        </li>
+        <li class="profile__item">
+          <span class="profile__title">following</span>
+          <span class="profile__number">0</span>
+        </li>
+        <li class="profile__item">
+          <span class="profile__title">follower</span>
+          <span class="profile__number">0</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -36,14 +34,9 @@ export default {};
 
 <style lang="scss" scoped>
 .profile {
-  padding: 40px 0;
-
-  &__body {
-    padding: 0 20px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
+  padding: 40px 6%;
+  max-width: $container;
+  margin: 0 auto;
   &__head {
     display: flex;
     justify-content: space-between;
