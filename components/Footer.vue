@@ -28,6 +28,7 @@ export default {};
   width: 100%;
   background-color: $white;
   border-top: 1px solid $gray-4;
+  z-index: 1000;
   &__body {
     max-width: $container;
     margin: 0 auto;
@@ -40,7 +41,7 @@ export default {};
   }
 
   &__button {
-    width: calc(100%/3);
+    width: calc(100% / 3);
     display: flex;
     justify-content: center;
   }
