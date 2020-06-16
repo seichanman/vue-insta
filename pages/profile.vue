@@ -2,13 +2,20 @@
   <div class="profile">
     <div class="profile__body">
       <div class="profile__head">
+        <login
+          class="profile__button"
+          v-if="!isAuthenticated"
+          :isAuthenticated="isAuthenticated"
+        />
         <div class="profile__user">
-          <div class="profile__icon">
-            <img src="~/static/images/post1.jpg" alt />
-          </div>
-          <span class="profile__name">user-name</span>
+          <template v-if="isAuthenticated">
+            <div class="profile__userIcon">
+              <img :src="user.photoURL" alt />
+            </div>
+            <span class="profile__name">{{ user.displayName }}</span>
+          </template>
         </div>
-        <button class="profile__button">ログアウト</button>
+        <button class="profile__button" @click="logout">ログアウト</button>
       </div>
       <div class="profile__info">
         <ul class="profile__items">
@@ -31,7 +38,23 @@
 </template>
 
 <script>
-export default {};
+import Login from "~/components/Login";
+import { firebase } from "~/plugins/firebase";
+import { mapGetters, mapState } from "vuex";
+export default {
+  components: {
+    Login
+  },
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
+    ...mapState(["user"])
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut();
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -54,12 +77,17 @@ export default {};
     display: flex;
     align-items: center;
   }
-  &__icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    overflow: hidden;
+
+  &__userIcon {
+    > img {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      object-fit: cover;
+      vertical-align: bottom;
+    }
   }
+
   &__name {
     margin-left: 10px;
   }
