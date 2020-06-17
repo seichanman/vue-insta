@@ -19,7 +19,9 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    &:nth-child(n + 2){
+      padding-top: 20px;
+    }
     &__info {
       align-items: center;
       display: flex;

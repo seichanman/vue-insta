@@ -13,3 +13,11 @@ export default {
  }
 }
 </script>
+
+<style lang="scss">
+  .users{
+    padding: 40px 6%;
+    max-width: $container;
+    margin: 0 auto;
+  }
+</style>
