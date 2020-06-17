@@ -86,7 +86,8 @@ export default {
   },
   mounted() {
     //非同期処理
-    db.collection("posts").onSnapshot(snapshot => {
+    db.collection("posts").orderBy('createdAt').onSnapshot(snapshot => {
+    //orderBy('') = 順番の並び替え
       snapshot.docChanges().forEach(change => {
         const doc = change.doc;
         if (change.type === "added") {
