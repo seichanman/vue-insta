@@ -25,7 +25,7 @@ export default {};
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   background-color: $white;
   border-top: 1px solid $gray-4;
   &__body {
