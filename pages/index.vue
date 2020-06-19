@@ -1,67 +1,77 @@
 <template>
-  <div>
-    <header class="header">
-      <div class="header__container">
-        <div class="header__logo">
-          <img src="/images/logo.png" class="">
-        </div>
-        <img class="header__post" src="/images/letter.svg" @click="openModal">
+  <div class="container">
+    <div>
+      <logo />
+      <h1 class="title">
+        sns-for-movie
+      </h1>
+      <h2 class="subtitle">
+        My badass Nuxt.js project
+      </h2>
+      <div class="links">
+        <a
+          href="https://nuxtjs.org/"
+          target="_blank"
+          class="button--green"
+        >
+          Documentation
+        </a>
+        <a
+          href="https://github.com/nuxt/nuxt.js"
+          target="_blank"
+          class="button--grey"
+        >
+          GitHub
+        </a>
       </div>
-    </header>
-    <div class="container">
-      <posts ref="posts" />
     </div>
   </div>
 </template>
 
 <script>
+import Logo from '~/components/Logo.vue'
 
-import Posts from '~/components/Posts.vue'
 export default {
- components: {
-   Posts
- },methods:{
-   openModal(){
-     this.$refs.posts.openModal()
-   }
- }
-
+  components: {
+    Logo
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-  .header{
-    border-bottom: 1px solid #ddd;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    background: #fff;
-    &__container{
-      position: relative;
-      max-width: $container;
-      margin: 0 auto;
-      padding:10px 20px;
-    }
-    &__logo{
-      margin: 0 auto;
-      max-width: 80px;
-      img{
-        display: flex;
-        align-items: center;
-      }
-    }
-    &__post{
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-      max-width: 24px;
-      cursor: pointer;
-    }
-  }
-  .container{
-    margin:50px 0 52px;
-  }
+<style>
+/* Sample `apply` at-rules with Tailwind CSS
+.container {
+  @apply min-h-screen flex justify-center items-center text-center mx-auto;
+}
+*/
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
+}
 </style>
