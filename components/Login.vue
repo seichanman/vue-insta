@@ -1,6 +1,9 @@
 <template>
   <div class="login">
-    <el-button @click="login">ログインする</el-button>
+    <div class="login__logo">
+      <img src="~/static/images/logo.png" alt />
+    </div>
+    <el-button class="login__button" @click="login" type="primary">ログインする</el-button>
   </div>
 </template>
 
@@ -31,6 +34,14 @@ export default {
   bottom: 0;
   background: #fff;
   z-index: 999;
-  padding: 6%;
+  padding: 30% 6%;
+
+  &__logo {
+    text-align: center;
+  }
+
+  &__button {
+    margin-top: 40px;
+  }
 }
 </style>

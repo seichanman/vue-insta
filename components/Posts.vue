@@ -6,23 +6,14 @@
         <div class="post-modal__action-arrow" @click="modalVisible = false">
           <img src="/images/back.svg" />
         </div>
-        <div class="post-modal__action-btn" @click="post">
-          Post
-        </div>
+        <div class="post-modal__action-btn" @click="post">Post</div>
       </div>
       <div class="post-modal__content">
         <div v-if="imageUrl" class="post-modal__content-img">
-          <img :src="imageUrl" alt="" />
+          <img :src="imageUrl" alt />
         </div>
-        <el-upload
-          v-if="!imageUrl"
-          action=""
-          :show-file-list="false"
-          :http-request="uploadFile"
-        >
-          <el-button class="post-modal__content-btn" size="small" type="primary"
-            >Click to upload</el-button
-          >
+        <el-upload v-if="!imageUrl" action :show-file-list="false" :http-request="uploadFile">
+          <el-button class="post-modal__content-btn" size="small" type="primary">Click to upload</el-button>
         </el-upload>
         <el-input
           class="post-modal__content-text"
@@ -65,7 +56,8 @@ export default {
       await db.collection("posts").add({
         text: this.text,
         image: this.imageUrl,
-        createdAt: new Date().getTime()
+        createdAt: new Date().getTime(),
+        userId: this.user.uid
       });
       this.modalVisible = false;
       this.text = null;
@@ -86,7 +78,8 @@ export default {
   },
   mounted() {
     //非同期処理
-    db.collection("posts").onSnapshot(snapshot => {
+    db.collection("posts").orderBy('createdAt').onSnapshot(snapshot => {
+    //orderBy('') = 順番の並び替え
       snapshot.docChanges().forEach(change => {
         const doc = change.doc;
         if (change.type === "added") {

@@ -5,10 +5,10 @@
         <nuxt-link to="/" class="footer__button">
           <img src="~/static/images/home.svg" alt class="footer__icon" />
         </nuxt-link>
-        <nuxt-link to="/users" class="footer__button">
+        <nuxt-link v-if="isAuthenticated" to="/users" class="footer__button">
           <img src="~/static/images/follow.svg" alt class="footer__icon" />
         </nuxt-link>
-        <nuxt-link to="/profile" class="footer__button">
+        <nuxt-link v-if="isAuthenticated" :to="`/users/${currentUser.uid}`" class="footer__button">
           <img src="~/static/images/profile.svg" alt class="footer__icon" />
         </nuxt-link>
       </div>
@@ -17,7 +17,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    currentUser() {
+      return this.$store.state.user;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
