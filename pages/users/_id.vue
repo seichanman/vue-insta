@@ -93,6 +93,7 @@ export default {
     },
     logout() {
       firebase.auth().signOut();
+      this.$router.push('/');
     },
   },
 };
