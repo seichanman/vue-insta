@@ -3,7 +3,7 @@
     <div class="user__info">
       <div class="user__avatar">
         <nuxt-link :to="`/users/${user.uid}`">
-          <img :src="user.photoURL" class="w-12 h-12 rounded-full" />
+          <img :src="user.photoURL" />
         </nuxt-link>
       </div>
       <div class="user__name">
@@ -12,7 +12,7 @@
     </div>
     <div class="follow" v-if="!isCurrentUser">
       <el-button class="follow__btn" v-if="!followed" @click="follow">Follow</el-button>
-      <el-button class="follow__btn" v-else @click="unfollow">Unfollow</el-button>
+      <el-button class="follow__btn active" v-else @click="unfollow">Unfollow</el-button>
     </div>
   </div>
 </template>
@@ -81,6 +81,10 @@ export default {
     margin-right: 10px;
     overflow: hidden;
     width: 50px;
+    img{
+      height: 100%;
+      object-fit: cover;
+    }
   }
   &__image {
     transform: translateY(-10%);
@@ -94,6 +98,11 @@ export default {
   &__btn {
     background-color: #fff;
     font-size: 1.4rem;
+    &.active{
+      background:#3490dc ;
+      color: #fff;
+      border: none;
+    }
   }
 }
 </style>

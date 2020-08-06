@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="outer">
     <div v-for="user in users" :key="user.id" class="users">
       <user :user="user" />
     </div>
@@ -28,9 +28,15 @@ export default {
 </script>
 
 <style lang="scss">
-.users {
+.outer{
   padding: 40px 6%;
+}
+
+.users {
   max-width: $container;
   margin: 0 auto;
+  &:nth-child(n + 2){
+    margin-top: 35px;
+  }
 }
 </style>
