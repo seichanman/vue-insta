@@ -24,7 +24,7 @@
         ></el-input>
       </div>
     </div>
-    <login v-else-if="!isAuthenticated && modalVisible" />
+    <login @login="login" v-else-if="!isAuthenticated && modalVisible" />
   </div>
 </template>
 
@@ -88,6 +88,15 @@ export default {
       const snapshot = await ref.put(data.file);
       const url = await snapshot.ref.getDownloadURL();
       this.imageUrl = url;
+    },
+    async login() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        const result = await firebase.auth().signInWithPopup(provider);
+      } catch (err) {
+        alert("ログインしないの？" + err);
+      }
+      this.modalVisible = false;
     },
   },
 };

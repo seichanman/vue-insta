@@ -3,27 +3,9 @@
     <div class="login__logo">
       <img src="~/static/images/logo.png" alt />
     </div>
-    <el-button class="login__button" @click="login" type="primary">ログインする</el-button>
+    <el-button class="login__button" @click="$emit('login')" type="primary">ログインする</el-button>
   </div>
 </template>
-
-<script>
-import { firebase } from "~/plugins/firebase";
-import { mapState } from "vuex";
-
-export default {
-  methods: {
-    async login() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      try {
-        const result = await firebase.auth().signInWithPopup(provider);
-      } catch (err) {
-        alert("ログインしないの？" + err);
-      }
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .login {
