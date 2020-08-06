@@ -99,6 +99,7 @@ export default {
 
 <style lang="scss" scoped>
 .post-item {
+  margin-top: 40px;
   &__user {
     display: flex;
     align-items: center;
