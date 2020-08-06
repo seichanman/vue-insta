@@ -40,16 +40,30 @@ export default {
       posts: [],
       imageUrl: null,
       text: null,
-      modalVisible: false
+      modalVisible: false,
     };
   },
   components: {
     Post,
-    Login
+    Login,
+  },
+  mounted() {
+    //非同期処理
+    db.collection("posts")
+      .orderBy("createdAt")
+      .onSnapshot((snapshot) => {
+        //orderBy('') = 順番の並び替え
+        snapshot.docChanges().forEach((change) => {
+          const doc = change.doc;
+          if (change.type === "added") {
+            this.posts.unshift({ id: doc.id, ...doc.data() });
+          }
+        });
+      });
   },
   computed: {
     ...mapGetters(["isAuthenticated"]),
-    ...mapState(["user"])
+    ...mapState(["user"]),
   },
   methods: {
     async post() {
@@ -57,7 +71,7 @@ export default {
         text: this.text,
         image: this.imageUrl,
         createdAt: new Date().getTime(),
-        userId: this.user.uid
+        userId: this.user.uid,
       });
       this.modalVisible = false;
       this.text = null;
@@ -74,20 +88,8 @@ export default {
       const snapshot = await ref.put(data.file);
       const url = await snapshot.ref.getDownloadURL();
       this.imageUrl = url;
-    }
+    },
   },
-  mounted() {
-    //非同期処理
-    db.collection("posts").orderBy('createdAt').onSnapshot(snapshot => {
-    //orderBy('') = 順番の並び替え
-      snapshot.docChanges().forEach(change => {
-        const doc = change.doc;
-        if (change.type === "added") {
-          this.posts.unshift({ id: doc.id, ...doc.data() });
-        }
-      });
-    });
-  }
 };
 </script>
 
